@@ -22,6 +22,16 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
+
+     /**
+     * This namespace is applied to your controller routes.
+     *
+     * In addition, it is set as the URL generator's root namespace.
+     *
+     * @var string
+     */
+    protected $namespace = 'App\Http\Controllers'; // need to add in Laravel
+
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
@@ -30,10 +40,12 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::middleware('api')
+                ->namespace($this->namespace) // need to add in Laravel 8
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
+                ->namespace($this->namespace) // need to add in Laravel 8
                 ->group(base_path('routes/web.php'));
         });
     }

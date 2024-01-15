@@ -15,4 +15,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('index');
+
+
+Route::get('/test', 'Web\SiteController@test')->name('test');
+Route::get('/db-test2', function(){
+    
+    return dd(DB::connection()->getPdo());
 });
+
+
+Route::get('/db-test', 'Web\SiteController@getall');
+
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
