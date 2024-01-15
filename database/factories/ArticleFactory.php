@@ -22,8 +22,12 @@ class ArticleFactory extends Factory
                 fake()->numberBetween(2,10)
             ),
             'content' => fake()->text(
-                fake()->numberBetween(100,300)
-            )
+                fake()->numberBetween(50,150)
+            ),
+            'tag' => fake()->randomElement(
+                Article::getAvailableTags()
+            ),
+            'authorId' => fake()->numberBetween(1,5)
             
         ];
     }
